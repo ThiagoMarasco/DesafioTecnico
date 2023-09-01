@@ -31,5 +31,20 @@ Este desafio envolve a execução de um aplicativo utilizando o Docker. Siga as 
    http://localhost:8000/propostas/registro
    ```
    Isso o levará à página inicial do programa no seu navegador.
+   
+7. **Para acessar o Admim:**
+   Abra seu navegador e insira o seguinte endereço na barra de busca:
+   ```
+   http://localhost:8000/admin
+   ```
+   para Username(Nome):
+   ```
+   thiago
+   ```
+   para Password(Senha):
+   ```
+   marasco1401
+   ```
+   
 
 Essas instruções são projetadas para tornar o processo simples e direto. Certifique-se de seguir cada etapa e observe o aplicativo em execução. Se você encontrar algum problema, verifique se seguiu todas as instruções corretamente.
