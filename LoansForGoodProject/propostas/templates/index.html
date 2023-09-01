@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Empréstimo</title>
+</head>
+<body>
+    <h1>Solicitação de Empréstimo</h1>
+    <form id="proposta-form">
+        <label for="documento">Documento:</label>
+        <input type="text" id="documento" name="documento" required>
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        
+        <button type="submit" id="button">Enviar Proposta</button>
+    </form>
+
+    <style>
+                body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <script>
+        document.getElementById('proposta-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const documento = document.getElementById('documento').value;
+            const nome = document.getElementById('nome').value;
+            document.getElementById("documento").disabled = true;
+            document.getElementById("nome").disabled = true;
+            document.getElementById("button").disabled = true;
+        
+            const dadosProposta = {
+                document: documento,
+                name: nome
+            };
+            
+            fetch('http://127.0.0.1:8000/propostas/api/v1/loan/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosProposta)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'Aprovada') {
+                    alert('Proposta aprovada!');
+                } else if (data.status === 'Negada') {
+                    alert('Proposta negada.');
+                } else {
+                    alert('Erro desconhecido ao avaliar a proposta.');
+                }
+                document.getElementById("documento").disabled = false;
+                document.getElementById("nome").disabled = false;
+                document.getElementById("button").disabled = false;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+
+    </script>
+</body>
+</html>
