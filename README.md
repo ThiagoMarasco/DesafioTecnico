@@ -44,7 +44,6 @@ Este desafio envolve a execução de um aplicativo utilizando o Docker. Siga as 
    ```
    para Password(Senha):
    ```
-   marasco1401
    ```
    
 
